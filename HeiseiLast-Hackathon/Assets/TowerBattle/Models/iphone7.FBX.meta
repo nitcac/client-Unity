@@ -1,0 +1,279 @@
+fileFormatVersion: 2
+guid: da8f77b4a1c96ca43bc25db91618a59e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: antena_part_002
+    100002: antena_parts_005
+    100004: body
+    100006: body bottom
+    100008: body segment 01
+    100010: body segment 02
+    100012: body top
+    100014: body_parts_006
+    100016: body_plastic001
+    100018: bottons
+    100020: button001
+    100022: button_glass001
+    100024: button_ring001
+    100026: camera_01_body001
+    100028: camera_01_glass001
+    100030: camera_01_lens001
+    100032: camera_01_ring001
+    100034: camera_02_body_003
+    100036: camera_02_glass001
+    100038: camera_02_lens001
+    100040: camera_02_ring001
+    100042: camera_02_ring_plastic001
+    100044: flash
+    100046: flash001
+    100048: //RootNode
+    100050: logo
+    100052: Object050
+    100054: Object051
+    100056: poly_antena_parts_004
+    100058: protective_glass001
+    100060: screen001
+    100062: screw_003
+    100064: screw_004
+    100066: speaker grid_01
+    100068: usb_part_002
+    100070: usb_parts_003
+    400000: antena_part_002
+    400002: antena_parts_005
+    400004: body
+    400006: body bottom
+    400008: body segment 01
+    400010: body segment 02
+    400012: body top
+    400014: body_parts_006
+    400016: body_plastic001
+    400018: bottons
+    400020: button001
+    400022: button_glass001
+    400024: button_ring001
+    400026: camera_01_body001
+    400028: camera_01_glass001
+    400030: camera_01_lens001
+    400032: camera_01_ring001
+    400034: camera_02_body_003
+    400036: camera_02_glass001
+    400038: camera_02_lens001
+    400040: camera_02_ring001
+    400042: camera_02_ring_plastic001
+    400044: flash
+    400046: flash001
+    400048: //RootNode
+    400050: logo
+    400052: Object050
+    400054: Object051
+    400056: poly_antena_parts_004
+    400058: protective_glass001
+    400060: screen001
+    400062: screw_003
+    400064: screw_004
+    400066: speaker grid_01
+    400068: usb_part_002
+    400070: usb_parts_003
+    2100000: buttons
+    2100002: plastic parts
+    2100004: screen mtl
+    2100006: Glass mtl
+    2100008: Chrome mtl
+    2100010: Lens mtl
+    2100012: flash_color
+    2100014: Body camera mtl
+    2100016: camera_dark_ring
+    2100018: Body metal silver
+    2100020: glass
+    2100022: Glass_flash mtl
+    2100024: No Name
+    2100026: body mtl
+    2100028: logo_blend_silver_mtl
+    2300000: antena_part_002
+    2300002: antena_parts_005
+    2300004: body
+    2300006: body bottom
+    2300008: body segment 01
+    2300010: body segment 02
+    2300012: body top
+    2300014: body_parts_006
+    2300016: body_plastic001
+    2300018: bottons
+    2300020: button001
+    2300022: button_glass001
+    2300024: button_ring001
+    2300026: camera_01_body001
+    2300028: camera_01_glass001
+    2300030: camera_01_lens001
+    2300032: camera_01_ring001
+    2300034: camera_02_body_003
+    2300036: camera_02_glass001
+    2300038: camera_02_lens001
+    2300040: camera_02_ring001
+    2300042: camera_02_ring_plastic001
+    2300044: flash
+    2300046: flash001
+    2300048: logo
+    2300050: poly_antena_parts_004
+    2300052: protective_glass001
+    2300054: screen001
+    2300056: screw_003
+    2300058: screw_004
+    2300060: speaker grid_01
+    2300062: usb_part_002
+    2300064: usb_parts_003
+    3300000: antena_part_002
+    3300002: antena_parts_005
+    3300004: body
+    3300006: body bottom
+    3300008: body segment 01
+    3300010: body segment 02
+    3300012: body top
+    3300014: body_parts_006
+    3300016: body_plastic001
+    3300018: bottons
+    3300020: button001
+    3300022: button_glass001
+    3300024: button_ring001
+    3300026: camera_01_body001
+    3300028: camera_01_glass001
+    3300030: camera_01_lens001
+    3300032: camera_01_ring001
+    3300034: camera_02_body_003
+    3300036: camera_02_glass001
+    3300038: camera_02_lens001
+    3300040: camera_02_ring001
+    3300042: camera_02_ring_plastic001
+    3300044: flash
+    3300046: flash001
+    3300048: logo
+    3300050: poly_antena_parts_004
+    3300052: protective_glass001
+    3300054: screen001
+    3300056: screw_003
+    3300058: screw_004
+    3300060: speaker grid_01
+    3300062: usb_part_002
+    3300064: usb_parts_003
+    4300000: button_ring001
+    4300002: body segment 02
+    4300004: screen001
+    4300006: screw_003
+    4300008: usb_part_002
+    4300010: camera_02_glass001
+    4300012: camera_01_glass001
+    4300014: logo
+    4300016: camera_02_lens001
+    4300018: body_parts_006
+    4300020: camera_02_body_003
+    4300022: camera_02_ring_plastic001
+    4300024: flash001
+    4300026: camera_01_body001
+    4300028: camera_01_ring001
+    4300030: camera_01_lens001
+    4300032: body bottom
+    4300034: button_glass001
+    4300036: camera_02_ring001
+    4300038: flash
+    4300040: antena_part_002
+    4300042: screw_004
+    4300044: usb_parts_003
+    4300046: poly_antena_parts_004
+    4300048: antena_parts_005
+    4300050: button001
+    4300052: bottons
+    4300054: speaker grid_01
+    4300056: body top
+    4300058: protective_glass001
+    4300060: body_plastic001
+    4300062: body
+    4300064: body segment 01
+    7400000: Take 001
+    9500000: //RootNode
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 0
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.001
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
