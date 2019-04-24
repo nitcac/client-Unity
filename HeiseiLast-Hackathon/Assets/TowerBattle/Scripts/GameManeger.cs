@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum TowerBattleState
 {
-    start, wait, put
+    wait, preparation, put
 }
 public class GameManeger : MonoBehaviour
 {
@@ -22,7 +22,7 @@ public class GameManeger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        state = TowerBattleState.start;
+        ChangeState(TowerBattleState.wait);
         nowHeight = Camera.main.transform.position.y;
     }
 
@@ -32,8 +32,15 @@ public class GameManeger : MonoBehaviour
 
     }
 
+    public void ChangeState(TowerBattleState changeState)
+    {
+        state = changeState;
+    }
+
     private void OnMouseDrag()
     {
+        if (state != TowerBattleState.wait && state != TowerBattleState.preparation) return;
+        ChangeState(TowerBattleState.preparation);
         SetNextObj();
         mousePos = Input.mousePosition;
         putPos = Camera.main.ScreenToWorldPoint((mousePos + zDistance));
@@ -42,8 +49,18 @@ public class GameManeger : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (state != TowerBattleState.preparation) return;
         if (putObj == null) { Debug.Log("Objnull"); return; }
         putObj.GetComponent<PutObj>().Put();
+        ChangeState(TowerBattleState.put);
+    }
+
+    private void PutObjSpin()
+    {
+        if (state == TowerBattleState.preparation)
+        {
+            //回転
+        }
     }
 
     void SetNextObj()
@@ -62,13 +79,13 @@ public class GameManeger : MonoBehaviour
             StartCoroutine(UpCameraPos(nowHeight));
         }
         putObj = null;
+        ChangeState(TowerBattleState.wait);
     }
 
     private IEnumerator UpCameraPos(float upPos)
     {
         float firstPos = Camera.main.transform.position.y;
-
-        while (Camera.main.transform.position.y + upPos * Time.deltaTime <= upPos)
+        while (Camera.main.transform.position.y + (upPos - firstPos) * Time.deltaTime <= upPos)
         {
             Camera.main.transform.position += new Vector3(0, (upPos - firstPos) * Time.deltaTime, 0);
         }
