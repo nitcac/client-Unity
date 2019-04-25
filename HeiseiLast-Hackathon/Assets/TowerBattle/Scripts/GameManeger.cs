@@ -68,6 +68,7 @@ public class GameManeger : MonoBehaviour
         if (state != TowerBattleState.preparation) return;
         if (putObj == null) { Debug.Log("Objnull"); return; }
         putObj.GetComponent<PutObj>().Put();
+        putObj.GetComponent<Animator>().enabled = false;
         stuckObj.Push(putObj);
         ChangeState(TowerBattleState.put);
     }
