@@ -9,10 +9,13 @@ public class AR_gameManager : MonoBehaviour {
   bool isFinding=false;
   bool isGameStart = false;
 
+  bool isMissionR;  //指示が右側か（falseで左）
+
   CameraDevice cameraDevice;
 
   [SerializeField]
   Text GengoText;
+  Text missionText;
 
   [SerializeField]
   Text debugText;
@@ -25,6 +28,7 @@ public class AR_gameManager : MonoBehaviour {
   GameObject frashImg;
   Text textBK;
   Text textRD;
+  GameObject shuchu;
 
   [SerializeField]
   Animator missionAnm;
@@ -46,6 +50,8 @@ public class AR_gameManager : MonoBehaviour {
     textRD = canvas.transform.Find("textFrame/textRD").gameObject.GetComponent<Text>();
     textBK.text = "新元号ついに発表";
     textRD.text = "";
+    missionText=canvas.transform.Find("mission/Text").gameObject.GetComponent<Text>();
+    shuchu = canvas.transform.Find("mission/shuchu").gameObject;
 
     AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
     audio_BGM = audioSources[0];
@@ -68,7 +74,18 @@ public class AR_gameManager : MonoBehaviour {
       Debug.Log("BPM:"+(BPMNum%8+1));
       //一時的に左側の条件を無効にしてます
       if (BPMNum>16 && (BPMNum % 8 == 1 && Random.Range(0, 5) == 7) ||BPMNum%16==10 ) {
-        Debug.Log("mission");
+        //左右どちらかに指示
+        if (Random.Range(0, 3) == 0) {
+          isMissionR=true;
+          missionText.text = "右に見せろ！";
+          shuchu.transform.localPosition = new Vector3(950,0,0);
+        }
+        else {
+          isMissionR = false;
+          missionText.text = "左に見せろ！";
+          shuchu.transform.localPosition = new Vector3(-950, 0, 0);
+        }
+
         missionAnm.SetTrigger("mission");
       }
     }
