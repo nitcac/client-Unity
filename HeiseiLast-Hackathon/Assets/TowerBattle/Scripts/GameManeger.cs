@@ -12,13 +12,17 @@ public class GameManeger : MonoBehaviour
     TowerBattleState state;
     Vector3 mousePos, zDistance = new Vector3(0, 0, 1);
     Vector3 putPos;
-    [SerializeField]
     GameObject putObj;
+    Stack<GameObject> stuckObj = new Stack<GameObject>();
     Rigidbody rb;
     [SerializeField]
     GameObject[] putObjList;
-    Vector3 objFirstPos = new Vector3(0, 0.6f, 0.82f);
+    Vector3 createObjPos = new Vector3(0, 0.6f, 0.82f);
     float nowHeight;
+    [SerializeField]
+    ScoreManeger scoreManeger;
+    [SerializeField]
+    UIManeger uiManeger;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,39 +39,48 @@ public class GameManeger : MonoBehaviour
     public void ChangeState(TowerBattleState changeState)
     {
         state = changeState;
+        if (state == TowerBattleState.wait)
+        {
+            SetNextObj();
+            ChangeState(TowerBattleState.preparation);
+        }
     }
 
-    private void OnMouseDrag()
+    public void OnScreenDrug()//画面全体ボタンから呼び出し
     {
-        if (state != TowerBattleState.wait && state != TowerBattleState.preparation) return;
+        if (state != TowerBattleState.preparation) return;
         ChangeState(TowerBattleState.preparation);
-        SetNextObj();
         mousePos = Input.mousePosition;
         putPos = Camera.main.ScreenToWorldPoint((mousePos + zDistance));
         putObj.transform.position = new Vector3(putPos.x, nowHeight + 0.6f, putPos.z);
+        Debug.Log("");
     }
 
-    private void OnMouseUp()
+    public void PutObjSpin()//ボタンからの呼び出し
+    {
+        if (state != TowerBattleState.preparation) return;
+        putObj.GetComponent<Animator>().SetTrigger("Spin");
+    }
+
+
+    public void OnScreenUp()
     {
         if (state != TowerBattleState.preparation) return;
         if (putObj == null) { Debug.Log("Objnull"); return; }
         putObj.GetComponent<PutObj>().Put();
+        stuckObj.Push(putObj);
         ChangeState(TowerBattleState.put);
-    }
-
-    private void PutObjSpin()
-    {
-        if (state == TowerBattleState.preparation)
-        {
-            //回転
-        }
     }
 
     void SetNextObj()
     {
         if (putObj == null)
         {
-            putObj = Instantiate(putObjList[Random.Range(0, putObjList.Length)], objFirstPos, Quaternion.Euler(new Vector3(0, 0, 0)));
+            createObjPos = new Vector3(0, nowHeight + 0.5f, 0.82f);
+            putObj = Instantiate(putObjList[Random.Range(0, putObjList.Length)], createObjPos, Quaternion.Euler(new Vector3(0, 0, 0)));
+            uiManeger.SetObjNameText(putObj.name);
+            scoreManeger.AddScore();
+            uiManeger.SetScoreText(scoreManeger.PutScore.ToString());
         }
     }
 
@@ -85,11 +98,16 @@ public class GameManeger : MonoBehaviour
     private IEnumerator UpCameraPos(float upPos)
     {
         float firstPos = Camera.main.transform.position.y;
-        while (Camera.main.transform.position.y + (upPos - firstPos) * Time.deltaTime <= upPos)
+        while (Camera.main.transform.position.y + (upPos - firstPos) * Time.deltaTime * 0.001f <= upPos)
         {
-            Camera.main.transform.position += new Vector3(0, (upPos - firstPos) * Time.deltaTime, 0);
+            Camera.main.transform.position += new Vector3(0, (upPos - firstPos) * Time.deltaTime * 0.001f, 0);
         }
         Camera.main.transform.position = new Vector3(0, upPos, 0);
         yield return null;
+    }
+
+    private void ResetGame()
+    {
+        //Reset処理 stuckObjの削除
     }
 }

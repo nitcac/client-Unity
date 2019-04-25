@@ -7,25 +7,20 @@ public class PutObj : MonoBehaviour
     [SerializeField]
     Rigidbody rb;
     GameManeger gameManeger;
-    bool isPut, heightCheck;
+    bool isPut;
 
     // Start is called before the first frame update
     void Start()
     {
         rb.useGravity = false;
         isPut = false;
-        heightCheck = false;
-        gameManeger = GameObject.Find("GameManeger").GetComponent<GameManeger>();
+        gameManeger = GameObject.Find("Maneger").GetComponent<GameManeger>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (rb.velocity.x <= 0.0001f && rb.velocity.y <= 0.0001f && isPut && !heightCheck)
-        {
-            gameManeger.CheckHeight();
-            heightCheck = true;
-        }
+
     }
 
     public void Put()
@@ -38,10 +33,16 @@ public class PutObj : MonoBehaviour
         if (!isPut)
         {
             isPut = true;
+            Invoke("CallCheckHeight", 0.5f);
         }
         if (other.transform.tag == "fall")
         {
             //おちたあ
         }
+    }
+
+    private void CallCheckHeight()
+    {
+        gameManeger.CheckHeight();
     }
 }
