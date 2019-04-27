@@ -7,6 +7,8 @@ public class UIManeger : MonoBehaviour
 {
     [SerializeField]
     Text scoreText, objNameText;
+    [SerializeField]
+    GameManeger gameManeger;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,11 @@ public class UIManeger : MonoBehaviour
     public void SetObjNameText(string name)
     {
         objNameText.text = name.Split('(')[0];
+    }
+
+    public void OnRestartButtonClick()
+    {
+        gameManeger.ChangeState(TowerBattleState.reset);
     }
 
 }

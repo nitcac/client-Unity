@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 973547696295632004}
   m_Layer: 0
   m_Name: iphone
-  m_TagString: Untagged
+  m_TagString: PutObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public enum TowerBattleState
 {
-    wait, preparation, put
+    wait, preparation, put, end, reset
 }
 public class GameManeger : MonoBehaviour
 {
@@ -13,6 +13,8 @@ public class GameManeger : MonoBehaviour
     Vector3 mousePos, zDistance = new Vector3(0, 0, 1);
     Vector3 putPos;
     GameObject putObj;
+    [SerializeField]
+    GameObject endUIPanel;
     Stack<GameObject> stuckObj = new Stack<GameObject>();
     Rigidbody rb;
     [SerializeField]
@@ -23,22 +25,56 @@ public class GameManeger : MonoBehaviour
     ScoreManeger scoreManeger;
     [SerializeField]
     UIManeger uiManeger;
+    bool isDrug;
+    Vector3 firstCameraPos;
     // Start is called before the first frame update
+
+    private void Awake()
+    {
+        firstCameraPos = Camera.main.transform.position;
+    }
     void Start()
     {
+        Camera.main.transform.position = firstCameraPos;
         ChangeState(TowerBattleState.wait);
         nowHeight = Camera.main.transform.position.y;
+        endUIPanel.SetActive(false);
+        isDrug = false;
+        Time.timeScale = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        if (isDrug)
+        {
+            OnScreenDrug();
+        }
     }
 
     public void ChangeState(TowerBattleState changeState)
     {
         state = changeState;
+        if (state == TowerBattleState.end)
+        {
+            endUIPanel.SetActive(true);
+            Time.timeScale = 0;
+        }
+        if (state == TowerBattleState.reset)
+        {
+            if (stuckObj.Count > 0)
+            {
+                foreach (var item in stuckObj)
+                {
+                    Destroy(item.gameObject);
+                    scoreManeger.ResetScore();
+                }
+            }
+            Destroy(putObj.gameObject);
+            Debug.Log(putObj);
+            putObj = null;
+            Start();
+        }
         if (state == TowerBattleState.wait)
         {
             SetNextObj();
@@ -46,7 +82,13 @@ public class GameManeger : MonoBehaviour
         }
     }
 
-    public void OnScreenDrug()//画面全体ボタンから呼び出し
+    public void OnScreenPut()//画面全体ボタンから呼び出し
+    {
+        isDrug = true;
+        Debug.Log("ositayo");
+    }
+
+    private void OnScreenDrug()//isDrugがTrueのときに呼び出し
     {
         if (state != TowerBattleState.preparation) return;
         ChangeState(TowerBattleState.preparation);
@@ -71,6 +113,7 @@ public class GameManeger : MonoBehaviour
         putObj.GetComponent<Animator>().enabled = false;
         stuckObj.Push(putObj);
         ChangeState(TowerBattleState.put);
+        isDrug = false;
     }
 
     void SetNextObj()
@@ -80,13 +123,13 @@ public class GameManeger : MonoBehaviour
             createObjPos = new Vector3(0, nowHeight + 0.5f, 0.82f);
             putObj = Instantiate(putObjList[Random.Range(0, putObjList.Length)], createObjPos, Quaternion.Euler(new Vector3(0, 0, 0)));
             uiManeger.SetObjNameText(putObj.name);
-            scoreManeger.AddScore();
             uiManeger.SetScoreText(scoreManeger.PutScore.ToString());
         }
     }
 
     public void CheckHeight()
     {
+        scoreManeger.AddScore();
         if (nowHeight <= putObj.transform.position.y)
         {
             nowHeight = putObj.transform.position.y;
@@ -98,10 +141,10 @@ public class GameManeger : MonoBehaviour
 
     private IEnumerator UpCameraPos(float upPos)
     {
-        float firstPos = Camera.main.transform.position.y;
-        while (Camera.main.transform.position.y + (upPos - firstPos) * Time.deltaTime * 0.001f <= upPos)
+        float beforePos = Camera.main.transform.position.y;
+        while (Camera.main.transform.position.y + (upPos - beforePos) * Time.deltaTime * 0.001f <= upPos)
         {
-            Camera.main.transform.position += new Vector3(0, (upPos - firstPos) * Time.deltaTime * 0.001f, 0);
+            Camera.main.transform.position += new Vector3(0, (upPos - beforePos) * Time.deltaTime * 0.001f, 0);
         }
         Camera.main.transform.position = new Vector3(0, upPos, 0);
         yield return null;
