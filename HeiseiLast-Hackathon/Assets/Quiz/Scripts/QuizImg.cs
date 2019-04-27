@@ -7,9 +7,10 @@ using UnityEngine.UI;
 public class QuizImg : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler {
   Rigidbody2D rg;
 
+  int year;
+
   void Start() {
     rg=GetComponent<Rigidbody2D>();
-    Debug.Log("でばっぐ");
   }
   void Update() {
 
@@ -27,7 +28,11 @@ public class QuizImg : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
   // ドラックが終了したとき呼ばれる.
   public void OnEndDrag(PointerEventData eventData) {
-    rg.gravityScale = 10 ;
+    rg.gravityScale = 15 ;
   }
 
+  public void setQuiz(string str,int n) {
+    this.transform.Find("Text").gameObject.GetComponent<Text>().text = str;
+    year = n;
+  }
 }
