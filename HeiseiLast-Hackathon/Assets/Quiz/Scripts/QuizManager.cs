@@ -16,8 +16,13 @@ public class QuizManager : MonoBehaviour {
   [SerializeField]
   GameObject QuizPrefab;
 
+  //効果音
+  AudioSource audio_right;
+  AudioSource audio_wrong;
+
   void Start() {
     loadQuizCSV();
+    LoadSounds();
 
     Invoke("QuizSpawn", 2f);
   }
@@ -42,6 +47,8 @@ public class QuizManager : MonoBehaviour {
   }
 
   void QuizSpawn() {
+    if (quizNum >= randomIndex.Count) return; //クイズ数超えたら
+
     //クイズのスポーン
     GameObject quizObj =
       Instantiate(
@@ -69,5 +76,19 @@ public class QuizManager : MonoBehaviour {
       randomIndex[i] = randomIndex[n];
       randomIndex[n] = tmp;
     }
+  }
+
+  public void quizRight(int year) {
+    audio_right.Play();
+  }
+
+  public void quizWrong(int year) {
+    audio_wrong.Play();
+  }
+
+  void LoadSounds() {
+    AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
+    audio_right = audioSources[0];
+    audio_wrong = audioSources[1];
   }
 }
