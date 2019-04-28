@@ -8,6 +8,8 @@ public class QuizImg : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
   Rigidbody2D rg;
   QuizManager quizManagerScript;
 
+  float speed;
+
   int year;
   bool isDragging;
 
@@ -18,7 +20,6 @@ public class QuizImg : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
     rg=GetComponent<Rigidbody2D>();
     quizManagerScript = GameObject.Find("GameManager").GetComponent<QuizManager>();
 
-
   }
   void Update() {
 
@@ -26,6 +27,7 @@ public class QuizImg : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
   
   // ドラックが開始したとき呼ばれる.
   public void OnBeginDrag(PointerEventData eventData) {
+    speed = rg.gravityScale;
     rg.gravityScale = 0;
     isDragging = true;
   }
@@ -37,7 +39,7 @@ public class QuizImg : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
 
   // ドラックが終了したとき呼ばれる.
   public void OnEndDrag(PointerEventData eventData) {
-    rg.gravityScale = 15 ;
+    rg.gravityScale = speed ;
     isDragging = false;
   }
 
@@ -47,7 +49,7 @@ public class QuizImg : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragH
   }
 
   private void OnTriggerStay2D(Collider2D collision) {
-    if (!isDragging) {
+    if (!isDragging && collision.tag=="ans") {
       if((collision.gameObject.name=="Zenki" && year>=1 && year<=15) ||
          (collision.gameObject.name=="Kouki" && year>=16) ||
          (collision.gameObject.name == "pipe1" && year < 0 )

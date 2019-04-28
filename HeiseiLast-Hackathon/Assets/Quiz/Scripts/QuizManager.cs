@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using UnityEngine.UI;
 
 public class QuizManager : MonoBehaviour {
   private TextAsset csvFile; // CSVファイル
@@ -15,6 +16,14 @@ public class QuizManager : MonoBehaviour {
 
   [SerializeField]
   GameObject QuizPrefab;
+
+  [SerializeField]
+  Text scoreText;
+  int rightNum=0;
+  int wrongNum=0;
+
+  [SerializeField]
+  Text infoText;
 
   //効果音
   AudioSource audio_right;
@@ -80,10 +89,18 @@ public class QuizManager : MonoBehaviour {
 
   public void quizRight(int year) {
     audio_right.Play();
+    rightNum++;
+    scoreText.text = " 正解 ：" + rightNum + "\n不正解："+wrongNum;
   }
 
   public void quizWrong(int year) {
     audio_wrong.Play();
+    wrongNum++;
+    scoreText.text = " 正解 ：" + rightNum + "\n不正解：" + wrongNum;
+  }
+
+  void setInfo() {
+
   }
 
   void LoadSounds() {
