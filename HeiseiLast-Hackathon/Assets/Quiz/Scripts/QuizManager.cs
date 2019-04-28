@@ -22,8 +22,15 @@ public class QuizManager : MonoBehaviour {
   int rightNum=0;
   int wrongNum=0;
 
+  //マルバツの画像，テキスト
   [SerializeField]
-  Text infoText;
+  GameObject maru;
+  Text maruInfo;
+  Animator maruAnm;
+  [SerializeField]
+  GameObject batsu;
+  Text batsuInfo;
+  Animator batsuAnm;
 
   //効果音
   AudioSource audio_right;
@@ -32,6 +39,7 @@ public class QuizManager : MonoBehaviour {
   void Start() {
     loadQuizCSV();
     LoadSounds();
+    GetMaruBatsu();
 
     Invoke("QuizSpawn", 2f);
   }
@@ -75,6 +83,7 @@ public class QuizManager : MonoBehaviour {
     Invoke("QuizSpawn", 4f);
   }
 
+  //ランダム番号のリストセット
   void setRandomIndex(int Len) {
     for (int i = 0; i < Len; i++) {
       randomIndex.Add(i);
@@ -91,16 +100,41 @@ public class QuizManager : MonoBehaviour {
     audio_right.Play();
     rightNum++;
     scoreText.text = " 正解 ：" + rightNum + "\n不正解："+wrongNum;
+
+    string gengo;
+    if (year > 0) gengo = "平成";
+    else {
+      gengo = "昭和";
+      year *= -1; //昭和データは負の数なので
+    }
+    maruInfo.text = gengo + year.ToString()+"年";
+    maruAnm.SetTrigger("view");
   }
 
   public void quizWrong(int year) {
     audio_wrong.Play();
     wrongNum++;
     scoreText.text = " 正解 ：" + rightNum + "\n不正解：" + wrongNum;
+
+    string gengo;
+    if (year > 0) gengo = "平成";
+    else {
+      gengo = "昭和";
+      year *= -1; //昭和データは負の数なので
+    }
+    batsuInfo.text = gengo + year.ToString() + "年";
+    batsuAnm.SetTrigger("view");
   }
 
   void setInfo() {
 
+  }
+
+  void GetMaruBatsu() {
+    maruInfo = maru.transform.Find("info").GetComponent<Text>();
+    maruAnm = maru.GetComponent<Animator>();
+    batsuInfo=batsu.transform.Find("info").GetComponent<Text>();
+    batsuAnm = batsu.GetComponent<Animator>();
   }
 
   void LoadSounds() {
