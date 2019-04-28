@@ -15,11 +15,11 @@ public class GameManeger : MonoBehaviour
     GameObject putObj;
     [SerializeField]
     GameObject endUIPanel;
-    Stack<GameObject> stuckObj = new Stack<GameObject>();
+    List<GameObject> stuckObj = new List<GameObject>();
     Rigidbody rb;
     [SerializeField]
     GameObject[] putObjList;
-    Vector3 createObjPos = new Vector3(0, 0.6f, 0.82f);
+    Vector3 createObjPos = new Vector3(0, 4.0f, 0f), firstCreateObjPos;
     float nowHeight;
     [SerializeField]
     ScoreManeger scoreManeger;
@@ -31,11 +31,13 @@ public class GameManeger : MonoBehaviour
 
     private void Awake()
     {
+        firstCreateObjPos = createObjPos;
         firstCameraPos = Camera.main.transform.position;
     }
     void Start()
     {
         Camera.main.transform.position = firstCameraPos;
+        createObjPos = firstCreateObjPos;
         ChangeState(TowerBattleState.wait);
         nowHeight = Camera.main.transform.position.y;
         endUIPanel.SetActive(false);
@@ -58,6 +60,7 @@ public class GameManeger : MonoBehaviour
         if (state == TowerBattleState.end)
         {
             endUIPanel.SetActive(true);
+            StopCoroutine("UpCameraPos");
             Time.timeScale = 0;
         }
         if (state == TowerBattleState.reset)
@@ -70,8 +73,8 @@ public class GameManeger : MonoBehaviour
                     scoreManeger.ResetScore();
                 }
             }
+            stuckObj = new List<GameObject>();
             Destroy(putObj.gameObject);
-            Debug.Log(putObj);
             putObj = null;
             Start();
         }
@@ -94,8 +97,7 @@ public class GameManeger : MonoBehaviour
         ChangeState(TowerBattleState.preparation);
         mousePos = Input.mousePosition;
         putPos = Camera.main.ScreenToWorldPoint((mousePos + zDistance));
-        putObj.transform.position = new Vector3(putPos.x, nowHeight + 0.6f, putPos.z);
-        Debug.Log("");
+        putObj.transform.position = new Vector3(putPos.x, nowHeight + 4.0f, putPos.z);
     }
 
     public void PutObjSpin()//ボタンからの呼び出し
@@ -109,9 +111,9 @@ public class GameManeger : MonoBehaviour
     {
         if (state != TowerBattleState.preparation) return;
         if (putObj == null) { Debug.Log("Objnull"); return; }
-        putObj.GetComponent<PutObj>().Put();
+        putObj.GetComponent<PutObj2d>().Put();
         putObj.GetComponent<Animator>().enabled = false;
-        stuckObj.Push(putObj);
+        stuckObj.Add(putObj);
         ChangeState(TowerBattleState.put);
         isDrug = false;
     }
@@ -120,7 +122,7 @@ public class GameManeger : MonoBehaviour
     {
         if (putObj == null)
         {
-            createObjPos = new Vector3(0, nowHeight + 0.5f, 0.82f);
+            createObjPos = new Vector3(0, nowHeight + 4.0f, 0f);
             putObj = Instantiate(putObjList[Random.Range(0, putObjList.Length)], createObjPos, Quaternion.Euler(new Vector3(0, 0, 0)));
             uiManeger.SetObjNameText(putObj.name);
             uiManeger.SetScoreText(scoreManeger.PutScore.ToString());
@@ -130,11 +132,18 @@ public class GameManeger : MonoBehaviour
     public void CheckHeight()
     {
         scoreManeger.AddScore();
+        for (int i = 0; i < stuckObj.Count; i++)
+        {
+            if (nowHeight <= stuckObj[i].transform.position.y)
+            {
+                nowHeight = stuckObj[i].transform.position.y;
+            }
+        }
         if (nowHeight <= putObj.transform.position.y)
         {
             nowHeight = putObj.transform.position.y;
-            StartCoroutine(UpCameraPos(nowHeight));
         }
+        StartCoroutine(UpCameraPos(nowHeight));
         putObj = null;
         ChangeState(TowerBattleState.wait);
     }
@@ -142,16 +151,12 @@ public class GameManeger : MonoBehaviour
     private IEnumerator UpCameraPos(float upPos)
     {
         float beforePos = Camera.main.transform.position.y;
-        while (Camera.main.transform.position.y + (upPos - beforePos) * Time.deltaTime * 0.001f <= upPos)
+        while (Camera.main.transform.position.y + (upPos - beforePos) * Time.deltaTime <= upPos)
         {
-            Camera.main.transform.position += new Vector3(0, (upPos - beforePos) * Time.deltaTime * 0.001f, 0);
+            Camera.main.transform.position += new Vector3(0, (upPos - beforePos) * Time.deltaTime, 0);
+            yield return null;
         }
-        Camera.main.transform.position = new Vector3(0, upPos, 0);
-        yield return null;
-    }
-
-    private void ResetGame()
-    {
-        //Reset処理 stuckObjの削除
+        Camera.main.transform.position = new Vector3(0, upPos, -10);
+        yield break;
     }
 }

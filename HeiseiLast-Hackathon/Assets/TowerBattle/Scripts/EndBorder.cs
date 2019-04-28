@@ -18,7 +18,7 @@ public class EndBorder : MonoBehaviour
 
     }
 
-    private void OnCollisionEnter(Collision other)
+    private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.transform.tag == "")
         {
@@ -26,7 +26,7 @@ public class EndBorder : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "PutObj")
         {
