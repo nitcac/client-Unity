@@ -31,6 +31,8 @@ public class GameManeger : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]
     AudioClip popSound, gameEndSound;
+    [SerializeField]
+    GameObject effectObj;
     // Start is called before the first frame update
 
     private void Awake()
@@ -132,10 +134,18 @@ public class GameManeger : MonoBehaviour
         {
             createObjPos = new Vector3(0, nowHeight + 4.0f, 0f);
             putObj = Instantiate(putObjList[Random.Range(0, putObjList.Length)], createObjPos, Quaternion.Euler(new Vector3(0, 0, 0)));
+            CreateEffect(createObjPos);
+            audioSource.clip = popSound;
             audioSource.Play();
             uiManeger.SetObjNameText(putObj.name);
             uiManeger.SetScoreText(scoreManeger.PutScore.ToString());
         }
+    }
+
+    void CreateEffect(Vector3 createPos)
+    {
+        GameObject effect = Instantiate(effectObj, createPos, Quaternion.identity);
+        Destroy(effect.gameObject, 1f);
     }
 
     public void CheckHeight()

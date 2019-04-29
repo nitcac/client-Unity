@@ -9,6 +9,10 @@ public class UIManeger : MonoBehaviour
     Text scoreText, objNameText, resultScoreText, rankingText;
     [SerializeField]
     GameManeger gameManeger;
+    [SerializeField]
+    AudioSource audioSource;
+    [SerializeField]
+    AudioClip audioClip;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +37,15 @@ public class UIManeger : MonoBehaviour
     public void OnRestartButtonClick()
     {
         gameManeger.ChangeState(TowerBattleState.reset);
+        audioSource.clip = audioClip;
+        audioSource.Play();
+    }
+
+    public void OnSpinButton()
+    {
+        gameManeger.PutObjSpin();
+        audioSource.clip = audioClip;
+        audioSource.Play();
     }
 
     public void SetResultScore(string score)
