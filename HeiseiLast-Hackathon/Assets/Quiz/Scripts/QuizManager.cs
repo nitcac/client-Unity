@@ -10,6 +10,7 @@ public class QuizManager : MonoBehaviour {
 
   List<int> randomIndex = new List<int>();
   int quizNum=0;  //クイズ出現順番
+  bool playing=true;
 
   [SerializeField]
   GameObject quizSpawner;
@@ -32,16 +33,22 @@ public class QuizManager : MonoBehaviour {
   Text batsuInfo;
   Animator batsuAnm;
 
+  [SerializeField]
+  GameObject EndImages;
+
   //効果音
   AudioSource audio_right;
   AudioSource audio_wrong;
+  AudioSource audio_BGM;
+  AudioSource audio_whistle;
 
   void Start() {
     loadQuizCSV();
     LoadSounds();
     GetMaruBatsu();
 
-    Invoke("QuizSpawn", 2f);
+    Invoke("QuizSpawn", 1f);
+    Invoke("GameEnd", 5f);
   }
 
   void Update() {
@@ -64,7 +71,7 @@ public class QuizManager : MonoBehaviour {
   }
 
   void QuizSpawn() {
-    if (quizNum >= randomIndex.Count) return; //クイズ数超えたら
+    if (quizNum >= randomIndex.Count || !playing) return; //クイズ数超えたら
 
     //クイズのスポーン
     GameObject quizObj =
@@ -80,7 +87,7 @@ public class QuizManager : MonoBehaviour {
       int.Parse(quizDataz[randomIndex[quizNum]][1])
     );
     quizNum++;
-    Invoke("QuizSpawn", 4f);
+    Invoke("QuizSpawn", 3.5f);
   }
 
   //ランダム番号のリストセット
@@ -97,6 +104,8 @@ public class QuizManager : MonoBehaviour {
   }
 
   public void quizRight(int year) {
+    if (!playing) return;
+
     audio_right.Play();
     rightNum++;
     scoreText.text = " 正解 ：" + rightNum + "\n不正解："+wrongNum;
@@ -112,6 +121,8 @@ public class QuizManager : MonoBehaviour {
   }
 
   public void quizWrong(int year) {
+    if (!playing) return;
+
     audio_wrong.Play();
     wrongNum++;
     scoreText.text = " 正解 ：" + rightNum + "\n不正解：" + wrongNum;
@@ -126,8 +137,14 @@ public class QuizManager : MonoBehaviour {
     batsuAnm.SetTrigger("view");
   }
 
-  void setInfo() {
-
+  void GameEnd() {
+    Debug.Log("終了");
+    audio_BGM.Stop();
+    playing = false;
+    audio_whistle.Play();
+    EndImages.SetActive(true);
+    EndImages.transform.Find("result/Text").
+      GetComponent<Text>().text = "正解の数・・・・"+rightNum+"\n不正解の数・・・"+wrongNum;
   }
 
   void GetMaruBatsu() {
@@ -141,5 +158,7 @@ public class QuizManager : MonoBehaviour {
     AudioSource[] audioSources = gameObject.GetComponents<AudioSource>();
     audio_right = audioSources[0];
     audio_wrong = audioSources[1];
+    audio_BGM = audioSources[2];
+    audio_whistle = audioSources[3];
   }
 }
