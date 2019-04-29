@@ -27,6 +27,10 @@ public class GameManeger : MonoBehaviour
     UIManeger uiManeger;
     bool isDrug;
     Vector3 firstCameraPos;
+    [SerializeField]
+    AudioSource audioSource;
+    [SerializeField]
+    AudioClip popSound, gameEndSound;
     // Start is called before the first frame update
 
     private void Awake()
@@ -43,6 +47,7 @@ public class GameManeger : MonoBehaviour
         endUIPanel.SetActive(false);
         isDrug = false;
         Time.timeScale = 1;
+        audioSource.clip = popSound;
     }
 
     // Update is called once per frame
@@ -59,8 +64,11 @@ public class GameManeger : MonoBehaviour
         state = changeState;
         if (state == TowerBattleState.end)
         {
+            audioSource.clip = gameEndSound;
+            audioSource.Play();
             endUIPanel.SetActive(true);
             StopCoroutine("UpCameraPos");
+            uiManeger.SetResultScore(scoreManeger.PutScore.ToString());
             Time.timeScale = 0;
         }
         if (state == TowerBattleState.reset)
@@ -124,6 +132,7 @@ public class GameManeger : MonoBehaviour
         {
             createObjPos = new Vector3(0, nowHeight + 4.0f, 0f);
             putObj = Instantiate(putObjList[Random.Range(0, putObjList.Length)], createObjPos, Quaternion.Euler(new Vector3(0, 0, 0)));
+            audioSource.Play();
             uiManeger.SetObjNameText(putObj.name);
             uiManeger.SetScoreText(scoreManeger.PutScore.ToString());
         }

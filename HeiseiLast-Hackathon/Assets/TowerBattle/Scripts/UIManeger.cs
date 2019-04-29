@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UIManeger : MonoBehaviour
 {
     [SerializeField]
-    Text scoreText, objNameText;
+    Text scoreText, objNameText, resultScoreText, rankingText;
     [SerializeField]
     GameManeger gameManeger;
     // Start is called before the first frame update
@@ -35,4 +35,13 @@ public class UIManeger : MonoBehaviour
         gameManeger.ChangeState(TowerBattleState.reset);
     }
 
+    public void SetResultScore(string score)
+    {
+        resultScoreText.text = "Score:" + score;
+    }
+
+    public void SetRankingText(string ranking)
+    {
+        rankingText.text = ranking;
+    }
 }
