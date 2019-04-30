@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuizManager : MonoBehaviour {
   private TextAsset csvFile; // CSVファイル
@@ -22,6 +23,11 @@ public class QuizManager : MonoBehaviour {
   Text scoreText;
   int rightNum=0;
   int wrongNum=0;
+
+  [SerializeField]
+  Text timerText;
+  float totalTime=30;
+  int seconds=0;
 
   //マルバツの画像，テキスト
   [SerializeField]
@@ -48,11 +54,11 @@ public class QuizManager : MonoBehaviour {
     GetMaruBatsu();
 
     Invoke("QuizSpawn", 1f);
-    Invoke("GameEnd", 5f);
+    Invoke("GameEnd", totalTime);
   }
 
   void Update() {
-
+    if(totalTime>0)timer();
   }
 
   void loadQuizCSV() {
@@ -160,5 +166,16 @@ public class QuizManager : MonoBehaviour {
     audio_wrong = audioSources[1];
     audio_BGM = audioSources[2];
     audio_whistle = audioSources[3];
+  }
+
+  void timer() {
+    totalTime -= Time.deltaTime;
+    seconds = (int)totalTime;
+    timerText.text = "TIME:"+seconds.ToString();
+  }
+
+  public void backTitleScene() {
+    Debug.Log("タイトル");
+    SceneManager.LoadScene("Title");
   }
 }
