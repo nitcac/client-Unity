@@ -22,7 +22,7 @@ public class APIManeger : MonoBehaviour
         aes.KeySize = 128;
         aes.BlockSize = 128;
         aes.Mode = CipherMode.CBC;
-        aes.Padding = PaddingMode.PKCS7;
+        //aes.Padding = PaddingMode.PKCS7;
         StartCoroutine(GetToken());
     }
 
@@ -36,25 +36,41 @@ public class APIManeger : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Get("http://ik1-309-14793.vs.sakura.ne.jp/api/auth/token");
         yield return request.SendWebRequest();
-
         if (!request.isNetworkError)
         {
             text = request.downloadHandler.text;
-            //Debug.Log(text);
+            Debug.Log("string request.downloadHandler.text = " + text);
             var json = JsonUtility.FromJson(text, typeof(Token)) as Token;
-            //Debug.Log(json.token);
+            Debug.Log("string token = " + json.token);
             tokenEncode = Encoding.UTF8.GetBytes(json.token);
+            string tokenEncodeLog = "";
+            foreach (var item in tokenEncode)
+            {
+                tokenEncodeLog += string.Format("{0,3:X2}", item);
+            }
+            Debug.Log("byte[] tokenEncode = " + tokenEncodeLog);
             for (int i = 0; i < count; i++)
             {
                 iv += numAndWords[Random.Range(0, numAndWords.Length)];
             }
+            Debug.Log("string iv = " + iv);
             ivEncode = Encoding.UTF8.GetBytes(iv);
             aes.IV = ivEncode;
             encryptBytes = aes.CreateEncryptor().TransformFinalBlock(tokenEncode, 0, tokenEncode.Length);//AES暗号化
+            string encryptLog = "";
+            foreach (var item in encryptBytes)
+            {
+                encryptLog += string.Format("{0,3:X2}", item);
+            }
+            Debug.Log("byte[] encryptLog = " + encryptLog);
             postToken = System.Convert.ToBase64String(encryptBytes);
-            postIV = System.Convert.ToBase64String(aes.IV);
+            Debug.Log("Base64Encode:token = " + postToken);
             StartCoroutine(PostToken());
             yield break;
+        }
+        else
+        {
+            Debug.Log("server error");
         }
     }
 
@@ -62,7 +78,7 @@ public class APIManeger : MonoBehaviour
     {
         UnityWebRequest request = UnityWebRequest.Post("http://ik1-309-14793.vs.sakura.ne.jp/api/auth", "");
         request.SetRequestHeader("encrypted", postToken);
-        request.SetRequestHeader("iv", postIV);
+        request.SetRequestHeader("iv", iv);
         yield return request.SendWebRequest();
         if (!request.isNetworkError)
         {

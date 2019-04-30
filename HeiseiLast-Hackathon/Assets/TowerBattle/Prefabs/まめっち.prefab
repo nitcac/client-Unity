@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 9220493919788459928}
   - component: {fileID: 2039539858202785400}
   m_Layer: 0
-  m_Name: "\u3081\u3081\u3063\u3061"
+  m_Name: "\u307E\u3081\u3063\u3061"
   m_TagString: PutObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

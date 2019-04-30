@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIManeger : MonoBehaviour
 {
@@ -39,6 +40,11 @@ public class UIManeger : MonoBehaviour
         gameManeger.ChangeState(TowerBattleState.reset);
         audioSource.clip = audioClip;
         audioSource.Play();
+    }
+
+    public void OnBackTitleButtonClick()
+    {
+        SceneManager.LoadScene("titlesceneの名前");
     }
 
     public void OnSpinButton()
