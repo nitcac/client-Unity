@@ -38,4 +38,9 @@ public class TitleManager : MonoBehaviour
     audio_select.Play();
     SceneManager.LoadScene("ARmainScene");
   }
+
+  public void PlayTower() {
+    audio_select.Play();
+    SceneManager.LoadScene("BattleScene2d");
+  }
 }

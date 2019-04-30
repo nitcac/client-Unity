@@ -48,7 +48,8 @@ public class UIManeger : MonoBehaviour
 
     public void OnBackTitleButtonClick()
     {
-        SceneManager.LoadScene("titlesceneの名前");
+    Time.timeScale = 1;
+        SceneManager.LoadScene("Title");
     }
 
     public void OnRankingViewClick()

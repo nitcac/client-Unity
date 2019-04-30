@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Quiz/Scenes/QuizMainScene.unity
     guid: 6086ab0c4a0be6c498e26c67aaed05b0
+  - enabled: 1
+    path: Assets/TowerBattle/Scenes/BattleScene2d.unity
+    guid: d94a208d4bd46fa40822026be08d9f56
   m_configObjects: {}
