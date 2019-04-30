@@ -1,0 +1,173 @@
+fileFormatVersion: 2
+guid: 97574e54c5cc6624d9995ab18e65ba8e
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: botan
+    100002: Circle.001
+    100004: Circle.002
+    100006: Circle.003
+    100008: Circle.004
+    100010: gamen
+    100012: hontai
+    100014: juuden
+    100016: neji
+    100018: Plane.001
+    100020: rimokon
+    100022: stick-L
+    100024: stick-R
+    100026: //RootNode
+    400000: botan
+    400002: Circle.001
+    400004: Circle.002
+    400006: Circle.003
+    400008: Circle.004
+    400010: gamen
+    400012: hontai
+    400014: juuden
+    400016: neji
+    400018: Plane.001
+    400020: rimokon
+    400022: stick-L
+    400024: stick-R
+    400026: //RootNode
+    2100000: Material.003
+    2100002: Material.001
+    2100004: Material
+    2100006: Material.011
+    2100008: No Name
+    2100010: Material.007
+    2100012: Material.006
+    2100014: Material.008
+    2100016: Material.009
+    2100018: Material.010
+    2100020: Material.013
+    2100022: Material.004
+    2100024: Material.005
+    2100026: Material.014
+    2300000: botan
+    2300002: Circle.001
+    2300004: Circle.002
+    2300006: Circle.003
+    2300008: Circle.004
+    2300010: gamen
+    2300012: hontai
+    2300014: juuden
+    2300016: neji
+    2300018: Plane.001
+    2300020: rimokon
+    2300022: stick-L
+    2300024: stick-R
+    3300000: botan
+    3300002: Circle.001
+    3300004: Circle.002
+    3300006: Circle.003
+    3300008: Circle.004
+    3300010: gamen
+    3300012: hontai
+    3300014: juuden
+    3300016: neji
+    3300018: Plane.001
+    3300020: rimokon
+    3300022: stick-L
+    3300024: stick-R
+    4300000: botan
+    4300002: gamen
+    4300004: neji
+    4300006: juuden
+    4300008: Plane.001
+    4300010: stick-R
+    4300012: stick-L
+    4300014: Circle.004
+    4300016: Circle.003
+    4300018: Circle.002
+    4300020: Circle.001
+    4300022: rimokon
+    4300024: hontai
+    2186277476908879412: ImportLogs
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    useSRGBMaterialColor: 1
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
