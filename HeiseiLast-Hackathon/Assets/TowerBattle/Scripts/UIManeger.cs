@@ -14,6 +14,10 @@ public class UIManeger : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]
     AudioClip audioClip;
+    [SerializeField]
+    GameObject rankingPanel, resultPanel;
+    [SerializeField]
+    APIManeger apiManager;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,13 @@ public class UIManeger : MonoBehaviour
         SceneManager.LoadScene("titlesceneの名前");
     }
 
+    public void OnRankingViewClick()
+    {
+        rankingPanel.SetActive(true);
+        resultPanel.SetActive(false);
+        apiManager.Request();
+    }
+
     public void OnSpinButton()
     {
         gameManeger.PutObjSpin();
@@ -57,6 +68,8 @@ public class UIManeger : MonoBehaviour
     public void SetResultScore(string score)
     {
         resultScoreText.text = "Score:" + score;
+        resultPanel.SetActive(true);
+        rankingPanel.SetActive(false);
     }
 
     public void SetRankingText(string ranking)
